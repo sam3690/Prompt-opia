@@ -7,19 +7,20 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 
 const Nav = () => {
+  const {data: session} = useSession();
 
-  const isUserLoggedIn = true;
+  // const isUserLoggedIn = true;
   const [providers, setProviders] = useState(null);
 const [ToggleDropdown, setToggleDropdown] = useState(false);
 
   useEffect(() => {
-    const setProviders = async () => {
+    const setUpProviders = async () => {
       const response = await getProviders()
 
       setProviders(response);
     }
 
-    setProviders();
+    setUpProviders();
   }, [])
 
   return (
@@ -40,9 +41,10 @@ const [ToggleDropdown, setToggleDropdown] = useState(false);
             </Link>
 
           </div> */}
-
+  
+        {/* Desktop Nav */}
       <div className="sm:flex hidden">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -76,7 +78,7 @@ const [ToggleDropdown, setToggleDropdown] = useState(false);
 
       {/* Mobile Navigation */}
       <div className="sm:hidden flex relative">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div>
                <Image 
                 src="/assets/images/logo.svg"
@@ -119,12 +121,19 @@ const [ToggleDropdown, setToggleDropdown] = useState(false);
           </div>
         ) : (
           <>
-            {providers && Object.values(providers).map((provider) =>(
-              
-              <button type="button" key={provider.name} onClick={() => signIn(provider.id)} className="outline_btn">
-                Sign In
-              </button>
-            ))}            
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type='button'
+                  key={provider.name}
+                  onClick={() => {
+                    signIn(provider.id);
+                  }}
+                  className='black_btn'
+                >
+                  Sign in
+                </button>
+              ))}
             </>
         )}
       </div>
