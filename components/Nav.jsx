@@ -55,7 +55,7 @@ const [ToggleDropdown, setToggleDropdown] = useState(false);
 
             <Link href="/profile">
               <Image 
-                src="/assets/images/logo.svg"
+                src={session?.user.image}
                 alt="profile_image"
                 width={37}
                 height={37}
@@ -81,7 +81,7 @@ const [ToggleDropdown, setToggleDropdown] = useState(false);
         {session?.user ? (
           <div>
                <Image 
-                src="/assets/images/logo.svg"
+                src={session?.user.image}
                 alt="profile_image"
                 width={37}
                 height={37}
@@ -93,14 +93,14 @@ const [ToggleDropdown, setToggleDropdown] = useState(false);
                 <div className="dropdown">
                   <Link
                     href="/profile"
-                    className="drowdown_link"
+                    className="dropwdown_link"
                     onClick={() => setToggleDropdown(false)}
                   >
                     My Profile
                   </Link>
                   <Link
                     href="/profile"
-                    className="drowdown_link"
+                    className="dropwdown_link"
                     onClick={() => setToggleDropdown(false)}
                   >
                     Create Prompt
