@@ -26,14 +26,27 @@ const Form = ({  type,  post,  setPost,  submitting, handleSubmit }) => {
             Tag {' '}
             <span className="font-normal">(#product, #webdevelopement, #idea)</span>
           </span>
-          <textarea 
-            value={post.prompt}
+          <input 
+            value={post.tag}
             onChange={(e) => setPost({ ...post,
-            prompt: e.target.value})}
-            className="form_textarea"
-            placeholder="Enter your AI Prompt here..."
+            tag: e.target.value})}
+            className="form_input"
+            placeholder="#Tag..."
           />
         </label>
+        <div className="flex-end mx-3 mb-5 gap-4">
+          <Link href="/" className="text-gray-500 text-sm">
+            Cancel
+          </Link>
+          <button
+            type="submit"
+            disabled={submitting}
+            className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white"
+          >
+            {submitting ? `${type}...` : type}
+            {/* Create */}
+          </button>
+        </div>
 
       </form>
     </section>

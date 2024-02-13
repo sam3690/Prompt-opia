@@ -99,7 +99,7 @@ const [ToggleDropdown, setToggleDropdown] = useState(false);
                     My Profile
                   </Link>
                   <Link
-                    href="/profile"
+                    href="/create-prompt"
                     className="dropwdown_link"
                     onClick={() => setToggleDropdown(false)}
                   >
